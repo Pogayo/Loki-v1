@@ -2,7 +2,7 @@ from flask import Flask, render_template, flash, redirect, request, session, log
 
 from flask_sqlalchemy import SQLAlchemy
 
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, TransValidateForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 import pymysql as MySQLdb
@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
 
     name= db.Column(db.String(15), unique=True)
 
@@ -28,6 +28,8 @@ class User(db.Model):
     email = db.Column(db.String(50), unique=True)
 
     password = db.Column(db.String(256), unique=True)
+
+    role = db.Column(db.String(256), server_default="member" )
 
 @app.route('/')
 def home():
@@ -54,6 +56,8 @@ def login():
                 session['email'] = user.email 
 
                 session['username'] = user.username
+
+                session['role'] = user.role
 
                 return redirect(url_for('home'))
 
@@ -103,6 +107,30 @@ def logout():
     session['logged_in'] = False
 
     return redirect(url_for('home'))
+
+@app.route('/predict/', methods = ['GET', 'POST'])
+
+def predict():
+	return "Hello World"
+
+@app.route('/trans-valid/', methods = ['GET', 'POST'])
+def transValid():
+
+    form = TransValidateForm(request.form)
+
+    if request.method == 'POST' and form.validate:
+
+        user = User.query.filter_by(email = session['email']).first()
+
+        if user:
+
+            user.role=form.example.data
+            db.session.commit()
+            return redirect(url_for('home'))
+
+    return render_template('trans-validate.html', form = form)
+
+
 
 if __name__ == '__main__':
     

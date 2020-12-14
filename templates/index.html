@@ -6,10 +6,10 @@
                 <div class="flex-row" style="margin-Right:auto"> <img src="{{url_for('static', filename='logo.png')}}" class="App-logo" alt="logo" />
                     <p>Machine Translation</p> </div>
                 {% if session.logged_in %}
-		          <a href="/logout/">Logout</a>
+		          <a href="/logout/" class="in-line header-link">Logout</a>
 	           {% else %}
 		            <a href="/login/" class="in-line header-link" rel="noopener noreferrer">Login</a>
-		             <a href="/register/">Sign up</a>
+		             <a href="/register/" class="in-line header-link">Sign up</a>
 	            {% endif %}
                 
             </header>
@@ -18,7 +18,39 @@
 <hr>
 
 {% if session['logged_in'] %}
+   <div class="welcome-div" style="width:80%;text-align: center;padding: 20px;color:white;">
     <h5>Welcome, {{session['username'] }}</h5>
+    <div>
+    	 {% if session.role=="member" %}
+    	 Want to help us improve the system?
+    	 <a href="trans-valid/">Sign up</a> to be a translator or a validator
+
+    	{% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <form action="{{ url_for('predict')}}" id="model_predictor" method="Post" >
+        <h3>Translate from Acholi to English</h3>
+        <fieldset>
+            Acholi Text: <br> <br>
+            <textarea name="text-message" rows="6" cols="50"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <input type="submit" value="Translate">
+        </fieldset>
+
+    </form>
+</div>
+
+{% else %}
+<div class="welcome-div" >
+<h3>Hi, there!</h3>
+<h4> We hope you are fine</h4>
+<h4> Please log in or sign up for an account to use our translation services. </h4>
+</div>
 {% endif %}
 
 {% endblock body %}
+

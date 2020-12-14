@@ -1,4 +1,4 @@
-from wtforms import Form, BooleanField, StringField, PasswordField, validators, TextAreaField, IntegerField
+from wtforms import Form, BooleanField, StringField, PasswordField, validators, TextAreaField, IntegerField, RadioField
 
 from wtforms.validators import DataRequired
 from wtforms import validators
@@ -9,6 +9,10 @@ class LoginForm(Form):
     email = StringField("Email", validators=[validators.Length(min=7, max=50), validators.DataRequired(message="Please Fill This Field")])
 
     password = PasswordField("Password", validators=[validators.DataRequired(message="Please Fill This Field")])
+
+class TransValidateForm(Form):
+    example = RadioField('I want to be a ...', choices=[('Translator','You can translate a sentences'),('Validator','You can validate peoples translations')],
+        validators=[validators.Length(min=3, max=25), validators.DataRequired(message="Please Fill This Field")])
 
 
 class RegisterForm(Form):
