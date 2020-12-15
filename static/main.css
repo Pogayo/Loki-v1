@@ -65,7 +65,7 @@ body{
       position: relative;
 }
 
-#model_predictor  {
+.model_predictor  {
       background:#f9f9f9;
       padding:  25px;
       margin: 150px 0;
@@ -73,21 +73,21 @@ body{
       border-radius: 10px;
 }
 
-#model_predictor h3{
+.model_predictor h3{
       display:  block;
       font-size:  30px;
       font-weight:  300;
       margin-bottom:  10px;
 }
 
-#model_predictor h4{
+.model_predictor h4{
       margin: 5px 0 15px;
       display:  block;
       font-size:  20px;
       {#font-weight: 40px;#}
 }
 
-fieldset{
+fieldset,{
       border:0;
       margin:0 0 10px;
       min-width: 100%;
@@ -96,7 +96,7 @@ fieldset{
       outline:  none;
     }
 
-    textarea{
+    textarea, .form-control{
       border:0;
       margin:0 0 10px;
       min-width: 100%;
@@ -106,7 +106,16 @@ fieldset{
 
     }
 
-    #model_predictor textarea{
+    .form-control{
+      border:0;
+      margin:0 0 10px;s
+      padding:5px;
+      width: 100%;
+      outline:  none;
+
+    }
+
+    .model_predictor textarea{
 /*      width: 100%;
 */      border: 1px solid #ccc;
       margin: 0 0 10px;
@@ -115,7 +124,7 @@ fieldset{
       transition:    all 0.3s ease-in-out;
           }
 
-    #model_predictor select:focus,option,textarea:focus{
+    .model_predictor select:focus,option,textarea:focus{
       transition:   border-color 0.3s ease-in-out;
       border:1px solid #bbb;
       outline:  none;
@@ -124,7 +133,7 @@ fieldset{
       background:#FFFFFF;
     }
 
-    #model_predictor input[type="submit"] {
+    .model_predictor input[type="submit"], .btn-primary {
       width: 100%;
 
       background-color: #4caf50;

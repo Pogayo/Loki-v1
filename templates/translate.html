@@ -11,33 +11,32 @@
 		          <a href="/logout/" class="in-line header-link">Logout</a>
 	           {% else %}
 		            <a href="/login/" class="in-line header-link" rel="noopener noreferrer">Login</a>
+		             <a href="/register/" class="in-line header-link">Sign up</a>
 	            {% endif %}
                 
             </header>
-   
-</div>
-
-<h4 class="welcome-div" style="padding:20px">
+<h4>
     <strong>
-        Register
-    </strong>
+Translate</strong>
 </h4>
 <hr>
-<br/>
-<form method="POST" class="container">
 
-    {{ render_field(form.name, class="form-control") }}
-    {{ render_field(form.username, class="form-control") }}
-    {{ render_field(form.email, class="form-control") }}
-    {{ render_field(form.password, class="form-control") }}
-    {{ render_field(form.confirm, class="form-control") }}
+<div class="container">
+    <form action="{{ url_for('translate')}}" class="model_predictor" method="Post" >
+        <h3>Translate from Acholi to English</h3>
+        <h4>Acholi text: Otyeno tero wu maber.</h4>
+        <fieldset>
+            English Translation: <br> <br>
+            <textarea name="text-message" rows="6" cols="50"></textarea>
+        </fieldset>
 
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+        <fieldset>
+            <input type="submit" value="Submit your translations">
+        </fieldset>
+
+    </form>
+</div>
 
 <hr>
-
-<div class="welcome-div" >
-<a href="/login" style="color:blue">Login into existing account!</a></div>
 
 {% endblock body %}

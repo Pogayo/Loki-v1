@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
+
 {% block body %}
 
 {% from "includes/formhelpers.html" import render_field %}
+
 
  <header class="App-header">
                 <div class="flex-row" style="margin-Right:auto"> <img src="{{url_for('static', filename='logo.png')}}" class="App-logo" alt="logo" />
@@ -16,22 +18,40 @@
                 
             </header>
 
+{% if session.role=="Validator" %}
+
 <div class="welcome-div" style="width:80%;text-align: center;padding: 20px;color:white;">
     <h5>Welcome, {{session['username'] }}</h5>
-<h4>
+
+    <h4>
     <strong>
-Help us improve</strong>
+Validate</strong>
 </h4>
 </div>
+
+
 <hr>
 
-<form method="POST" class="container">
+<div class="container">
+    <form action="{{ url_for('validate')}}" class="model_predictor" method="Post" >
+        <h3> Validate Acholi to English translations</h3>
+        <h4>Acholi text: Otyeno tero wu maber.</h4>
+        <h4>Englishtext: You are having a good evening.</h4>
 
-    {{ render_field(form.example, class="form-control") }} 
+       <form method="POST">
+
+    {{render_field(form.isValid, class="form-control") }} 
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+    </form>
+</div>
+
 <hr>
+
+{% endif %}
+
+<div class="welcome-div">You need to sign up as a validator to access this page. Go back to <a href="/">home page</a></div>
 
 {% endblock body %}

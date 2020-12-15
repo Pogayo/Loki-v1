@@ -14,7 +14,6 @@
                 
             </header>
    
-</div>
 <hr>
 
 {% if session['logged_in'] %}
@@ -24,16 +23,26 @@
     	 {% if session.role=="member" %}
     	 Want to help us improve the system?
     	 <a href="trans-valid/">Sign up</a> to be a translator or a validator
-
+    	 {% elif session.role=="Translator" %}
+           <a href="translate/" class="in-line header-link" style="color:blue">Translate for us</a>
+    	 {% elif session.role=="Validator" %}
+    	 	<a href="translate/" class="in-line header-link" style="color:blue">Translate for us</a>
+            <a href="validate/" class="in-line header-link" style="color:blue">Validate for us</a>
+         {% else %}
+         	<a href="translate/" class="in-line header-link">Translate</a>
+            <a href="validate/" class="in-line header-link">validate</a>
+            <a href="delete/" class="in-line header-link">Delete</a>
+            <a href="edit/" class="in-line header-link">Edit</a>
     	{% endif %}
     </div>
 </div>
 
 <div class="container">
-    <form action="{{ url_for('predict')}}" id="model_predictor" method="Post" >
+    <form action="{{ url_for('predict')}}" class="model_predictor" method="Post" >
+    	<h2>Let us Translate for you!</h2>
         <h3>Translate from Acholi to English</h3>
         <fieldset>
-            Acholi Text: <br> <br>
+            Acholi Text to be translated: <br> <br>
             <textarea name="text-message" rows="6" cols="50"></textarea>
         </fieldset>
 
@@ -49,6 +58,11 @@
 <h3>Hi, there!</h3>
 <h4> We hope you are fine</h4>
 <h4> Please log in or sign up for an account to use our translation services. </h4>
+</div>
+<div class="welcome-div">
+	<a href="/" class="in-line header-link" style="color:blue">How to get started with Loki</a>
+	<a href="/" class="in-line header-link" style="color:blue">Language resources</a>
+
 </div>
 {% endif %}
 

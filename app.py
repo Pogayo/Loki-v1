@@ -2,7 +2,7 @@ from flask import Flask, render_template, flash, redirect, request, session, log
 
 from flask_sqlalchemy import SQLAlchemy
 
-from forms import LoginForm, RegisterForm, TransValidateForm
+from forms import LoginForm, RegisterForm, TransValidateForm, ValidateForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
 import pymysql as MySQLdb
@@ -71,6 +71,7 @@ def login():
 
 
 @app.route('/register/', methods = ['GET', 'POST'])
+
 def register():
     
     form = RegisterForm(request.form)
@@ -125,15 +126,50 @@ def transValid():
         if user:
 
             user.role=form.example.data
+            session['role']=form.example.data
             db.session.commit()
             return redirect(url_for('home'))
 
     return render_template('trans-validate.html', form = form)
 
 
+@app.route('/translate/', methods = ['GET', 'POST'])
+def translate():
+
+    form = TransValidateForm(request.form)
+
+    if request.method == 'POST' and form.validate:
+
+        user = User.query.filter_by(email = session['email']).first()
+
+        if user:
+
+            user.role=form.example.data
+            db.session.commit()
+            return redirect(url_for('home'))
+
+    return render_template('translate.html', form = form)
+
+@app.route('/validate/', methods = ['GET', 'POST'])
+def validate():
+
+    form = ValidateForm(request.form)
+
+    if request.method == 'POST' and form.validate:
+
+        user = User.query.filter_by(email = session['email']).first()
+
+        if user:
+
+            valid=form.isValid.data
+            db.session.commit()
+            return redirect(url_for('home'))
+
+    return render_template('validate.html', form = form)
+
 
 if __name__ == '__main__':
     
     db.create_all()
     
-    app.run(debug=True)
+    app.run(ssl_context=('cert.pem', 'key.pem'))

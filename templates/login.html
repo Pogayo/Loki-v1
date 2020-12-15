@@ -3,15 +3,27 @@
 {% block body %}
 
 {% from "includes/formhelpers.html" import render_field %}
+<header class="App-header">
+                <div class="flex-row" style="margin-Right:auto"> <img src="{{url_for('static', filename='logo.png')}}" class="App-logo" alt="logo" />
+                    <p>Machine Translation</p> </div>
+                {% if session.logged_in %}
+		          <a href="/logout/" class="in-line header-link">Logout</a>
+	           {% else %}
+		             <a href="/register/" class="in-line header-link">Sign up</a>
+	            {% endif %}
+                
+            </header>
+   
+</div>
 
-<h4>
+<h4 class="welcome-div">
     <strong>
         Login
     </strong>
 </h4>
 <hr>
 
-<form method="POST">
+<form method="POST" class="container">
 
     {{ render_field(form.email, class="form-control") }}
     {{ render_field(form.password, class="form-control") }}
@@ -20,7 +32,7 @@
 </form>
 
 <hr>
-
-<a href="/register">Create a New Account!</a>
+<div class="welcome-div" >
+<a href="/register" style="color:blue">Create a New Account!</a></div>
 
 {% endblock body %}
