@@ -1,6 +1,8 @@
-# Flask-Login-Register
+# Loki
 ---
-- This project is simple implementation Login Registration flow in Flask-MySQL.
+- Machine Translation project for English - Acholi.
+- Find [here the link]()to the application.
+- You can check out the notebooks used for training the models in the notebooks folder
 
 ### Modules used
 ---
@@ -11,7 +13,7 @@
 |Flask-SQLAlchemy|Adding support of SQLAlchemy into application|
 |Flask-WTF       | provide the interactive user interface for the user |
 |SQLAlchemy      |Provide ORM and  full power and flexibility of SQL |
-|Werkzeug        | For hashing and checking password|
+|Werkzeug        |For hashing and checking password|
 |WTForms         |flexible forms validation and rendering|
 
 ### Installation
@@ -35,9 +37,3 @@
 - After setting flask application, To run application use below command
 - ```flask run --port=8080```
 - ```--port``` is optional
-
-# Author
----
-- D H R U V &nbsp; P R A J A P A T I
-
-# Thank You!

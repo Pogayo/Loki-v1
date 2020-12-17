@@ -21,13 +21,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-session['logged_in'] = True
 
-session['email'] = "perezogayo@gmail.com" 
-
-session['username'] = "Guest"
-
-session['role'] = "Validator"
 
 class User(db.Model):
 
@@ -46,14 +40,30 @@ class User(db.Model):
 @app.route('/', methods = ['GET', 'POST'])
 def home():
 
+    session['logged_in'] = True
+
+    session['email'] = "perezogayo@gmail.com" 
+
+    session['username'] = "Guest"
+
+    session['role'] = "Validator"
+
     if request.method == 'POST':
         data= request.form['text-message']
-
+        source=request.form['source']
+        lang={}
+        if source=="en":
+            lang['source']="English"
+            lang["target"]="Acholi"
+        else:
+            lang['source']="Acholi"
+            lang["target"]="English"
         results=predict.return_results(data)
 
         return render_template('index.html',
                                      original_input=data,           
                                      result=results,
+                                     lang=lang
                                      )
 
 

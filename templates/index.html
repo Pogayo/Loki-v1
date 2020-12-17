@@ -37,10 +37,21 @@
     </div>
 </div>
 
+
 <div class="flex-container">
     <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
     	<h2>Let us Translate for you!</h2>
-        <h3>Translate from Acholi to English</h3>
+         
+         <div>
+            <input type="radio" id="acholi" name="source" value="ach">
+<label for="acholi">Acholi</label><br>
+ <input type="radio" id="english" name="source" value="en">
+<label for="english">English</label><br>
+
+         </div>
+
+<!--         <h3>Translate from Acholi to English</h3>
+ -->
         <fieldset>
             Acholi Text to be translated: <br> <br>
             <textarea name="text-message" rows="6" cols="50"></textarea>
@@ -54,13 +65,16 @@
 
 <div class="result model_predictor" align="center">
     {% if result %}
+    Translating from {{lang["source"]}} to {{lang["target"]}}
+        Sentence: 
         <b>{{original_input}}</b>
         <br>
-        <br> Predicted number of bikes in use:
+        <br> Translation:
            <p style="font-size:50px">{{ result }}</p>
     {% endif %}
 </div>
 </div>
+
 
 {% else %}
 <div class="welcome-div" >
