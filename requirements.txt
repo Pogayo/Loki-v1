@@ -7,4 +7,4 @@ Werkzeug
 WTForms
 email-validator
 torch
-transformers sentencepiece
+transformers[sentencepiece]

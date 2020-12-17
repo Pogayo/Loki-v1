@@ -58,7 +58,7 @@ def home():
         else:
             lang['source']="Acholi"
             lang["target"]="English"
-        results=predict.return_results(data)
+        results=predict.return_results(data, source)
 
         return render_template('index.html',
                                      original_input=data,           

@@ -18,7 +18,7 @@
 
 {% if session['logged_in'] %}
    <div class="welcome-div" style="width:80%;text-align: center;padding: 20px;color:white;">
-    <h5>Welcome, {{session['username'] }}</h5>
+    <h1>Welcome, {{session['username'] }}!</h1>
     <div>
     	 {% if session.role=="member" %}
     	 Want to help us improve the system?
@@ -26,8 +26,8 @@
     	 {% elif session.role=="Translator" %}
            <a href="translate/" class="in-line header-link" style="color:blue">Translate for us</a>
     	 {% elif session.role=="Validator" %}
-    	 	<a href="translate/" class="in-line header-link" style="color:blue">Translate for us</a>
-            <a href="validate/" class="in-line header-link" style="color:blue">Validate for us</a>
+    	 	<!-- <a href="translate/" class="in-line header-link" style="color:blue">Translate for us</a>
+            <a href="validate/" class="in-line header-link" style="color:blue">Validate for us</a> -->
          {% else %}
          	<a href="translate/" class="in-line header-link">Translate</a>
             <a href="validate/" class="in-line header-link">validate</a>
@@ -43,18 +43,17 @@
     	<h2>Let us Translate for you!</h2>
          
          <div>
-            <input type="radio" id="acholi" name="source" value="ach">
-<label for="acholi">Acholi</label><br>
- <input type="radio" id="english" name="source" value="en">
-<label for="english">English</label><br>
-
+            <p>You are translating from? </p>
+            <input type="radio" id="acholi" name="source" value="ach" required>
+            <label for="acholi">Acholi</label><br>
+             <input type="radio" id="english" name="source" value="en">
+            <label for="english">English</label><br>
+           <br>
          </div>
 
-<!--         <h3>Translate from Acholi to English</h3>
- -->
-        <fieldset>
-            Acholi Text to be translated: <br> <br>
-            <textarea name="text-message" rows="6" cols="50"></textarea>
+         <fieldset>
+            Enter text to be translated: <br> <br>
+            <textarea name="text-message" rows="6" cols="50" minlength="2" required ></textarea>
         </fieldset>
 
         <fieldset>
@@ -66,11 +65,13 @@
 <div class="result model_predictor" align="center">
     {% if result %}
     Translating from {{lang["source"]}} to {{lang["target"]}}
-        Sentence: 
-        <b>{{original_input}}</b>
+        <h4>Your Sentence: </h4>
+        <b style="color:blue">{{original_input}}</b>
         <br>
-        <br> Translation:
-           <p style="font-size:50px">{{ result }}</p>
+        <br> <h4>The Translation:</h4>
+           <p style="font-size:50px; color:green">{{ result }}</p>
+    {% else %}  
+    <p style="font-size:20px"> The translation will appear here! Just type a sentence and hit submit and make sure you have selected the language.</p>   
     {% endif %}
 </div>
 </div>
