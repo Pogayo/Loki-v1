@@ -5,3 +5,6 @@ Flask-WTF
 SQLAlchemy
 Werkzeug
 WTForms
+email-validator
+torch
+transformers sentencepiece

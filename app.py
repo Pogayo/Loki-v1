@@ -5,7 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, RegisterForm, TransValidateForm, ValidateForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
-import pymysql as MySQLdb
+# import pymysql as MySQLdb
+
+import predict
+
+
 
 app = Flask(__name__)
 
@@ -16,6 +20,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+session['logged_in'] = True
+
+session['email'] = "perezogayo@gmail.com" 
+
+session['username'] = "Guest"
+
+session['role'] = "Validator"
 
 class User(db.Model):
 
@@ -31,141 +43,150 @@ class User(db.Model):
 
     role = db.Column(db.String(256), server_default="member" )
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def home():
+
+    if request.method == 'POST':
+        data= request.form['text-message']
+
+        results=predict.return_results(data)
+
+        return render_template('index.html',
+                                     original_input=data,           
+                                     result=results,
+                                     )
+
 
     return render_template('index.html')
 
-@app.route('/login/', methods = ['GET', 'POST'])
-def login():
+# @app.route('/login/', methods = ['GET', 'POST'])
+# def login():
 
-    form = LoginForm(request.form)
+#     form = LoginForm(request.form)
 
-    if request.method == 'POST' and form.validate:
+#     if request.method == 'POST' and form.validate:
 
-        user = User.query.filter_by(email = form.email.data).first()
+#         user = User.query.filter_by(email = form.email.data).first()
 
-        if user:
+#         if user:
 
-            if check_password_hash(user.password, form.password.data):
+#             if check_password_hash(user.password, form.password.data):
 
-                flash('You have successfully logged in.', "success")
+#                 flash('You have successfully logged in.', "success")
                 
-                session['logged_in'] = True
+#                 session['logged_in'] = True
 
-                session['email'] = user.email 
+#                 session['email'] = user.email 
 
-                session['username'] = user.username
+#                 session['username'] = user.username
 
-                session['role'] = user.role
+#                 session['role'] = user.role
 
-                return redirect(url_for('home'))
+#                 return redirect(url_for('home'))
 
-            else:
+#             else:
 
-                flash('Username or Password Incorrect', "Danger")
+#                 flash('Username or Password Incorrect', "Danger")
 
-                return redirect(url_for('login'))
+#                 return redirect(url_for('login'))
 
-    return render_template('login.html', form = form)
+#     return render_template('login.html', form = form)
 
 
-@app.route('/register/', methods = ['GET', 'POST'])
+# @app.route('/register/', methods = ['GET', 'POST'])
 
-def register():
+# def register():
     
-    form = RegisterForm(request.form)
+#     form = RegisterForm(request.form)
     
-    if request.method == 'POST' and form.validate():
+#     if request.method == 'POST' and form.validate():
     
-        hashed_password = generate_password_hash(form.password.data, method='sha256')
+#         hashed_password = generate_password_hash(form.password.data, method='sha256')
     
-        new_user = User(
+#         new_user = User(
             
-            name = form.name.data, 
+#             name = form.name.data, 
             
-            username = form.username.data, 
+#             username = form.username.data, 
             
-            email = form.email.data, 
+#             email = form.email.data, 
             
-            password = hashed_password)
+#             password = hashed_password)
     
-        db.session.add(new_user)
+#         db.session.add(new_user)
     
-        db.session.commit()
+#         db.session.commit()
     
-        flash('You have successfully registered', 'success')
+#         flash('You have successfully registered', 'success')
     
-        return redirect(url_for('login'))
+#         return redirect(url_for('login'))
     
-    else:
+#     else:
     
-        return render_template('register.html', form = form)
+#         return render_template('register.html', form = form)
 
-@app.route('/logout/')
-def logout():
+# @app.route('/logout/')
+# def logout():
     
-    session['logged_in'] = False
+#     session['logged_in'] = False
 
-    return redirect(url_for('home'))
+#     return redirect(url_for('home'))
 
-@app.route('/predict/', methods = ['GET', 'POST'])
-
-def predict():
-	return "Hello World"
-
-@app.route('/trans-valid/', methods = ['GET', 'POST'])
-def transValid():
-
-    form = TransValidateForm(request.form)
-
-    if request.method == 'POST' and form.validate:
-
-        user = User.query.filter_by(email = session['email']).first()
-
-        if user:
-
-            user.role=form.example.data
-            session['role']=form.example.data
-            db.session.commit()
-            return redirect(url_for('home'))
-
-    return render_template('trans-validate.html', form = form)
+# @app.route('/predict/', methods = ['GET', 'POST'])
 
 
-@app.route('/translate/', methods = ['GET', 'POST'])
-def translate():
+# @app.route('/trans-valid/', methods = ['GET', 'POST'])
+# def transValid():
 
-    form = TransValidateForm(request.form)
+#     form = TransValidateForm(request.form)
 
-    if request.method == 'POST' and form.validate:
+#     if request.method == 'POST' and form.validate:
 
-        user = User.query.filter_by(email = session['email']).first()
+#         user = User.query.filter_by(email = session['email']).first()
 
-        if user:
+#         if user:
 
-            user.role=form.example.data
-            db.session.commit()
-            return redirect(url_for('home'))
+#             user.role=form.example.data
+#             session['role']=form.example.data
+#             db.session.commit()
+#             return redirect(url_for('home'))
 
-    return render_template('translate.html', form = form)
+#     return render_template('trans-validate.html', form = form)
 
-@app.route('/validate/', methods = ['GET', 'POST'])
-def validate():
 
-    form = ValidateForm(request.form)
+# @app.route('/translate/', methods = ['GET', 'POST'])
+# def translate():
 
-    if request.method == 'POST' and form.validate:
+#     form = TransValidateForm(request.form)
 
-        user = User.query.filter_by(email = session['email']).first()
+#     if request.method == 'POST' and form.validate:
 
-        if user:
+#         user = User.query.filter_by(email = session['email']).first()
 
-            valid=form.isValid.data
-            db.session.commit()
-            return redirect(url_for('home'))
+#         if user:
 
-    return render_template('validate.html', form = form)
+#             user.role=form.example.data
+#             db.session.commit()
+#             return redirect(url_for('home'))
+
+#     return render_template('translate.html', form = form)
+
+# @app.route('/validate/', methods = ['GET', 'POST'])
+# def validate():
+
+#     form = ValidateForm(request.form)
+
+#     if request.method == 'POST' and form.validate:
+
+#         user = User.query.filter_by(email = session['email']).first()
+
+#         if user:
+
+#             valid=form.isValid.data
+#             db.session.commit()
+#             return redirect(url_for('home'))
+
+#     return render_template('validate.html', form = form)
 
 
 if __name__ == '__main__':
@@ -173,3 +194,12 @@ if __name__ == '__main__':
     db.create_all()
     
     app.run(ssl_context=('cert.pem', 'key.pem'))
+
+
+# def predict_ach()
+
+#     if flask.request.method == 'POST':
+#         data= flask.request.form['text-message']
+
+#         results=predict.return_results(data)
+

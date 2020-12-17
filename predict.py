@@ -14,10 +14,15 @@ device = 'cpu'
 if torch.cuda.is_available(): #check if GPU device is available
     device = 'cuda' # assign the gpu to the device
 
-tokens=tokenizer.prepare_seq2seq_batch([data],padding=True,truncation=True, return_tensors="pt" )
 
-tokens.to(device)
-model.to(device)
-translated = model.generate(**tokens)
-tgt_text = [tokenizer.decode(t, skip_special_tokens=True) for t in translated]
-result=tgt_text[0]
+
+def return_results(data):
+	tokens=tokenizer.prepare_seq2seq_batch([data],padding=True,truncation=True, return_tensors="pt" )
+
+	tokens.to(device)
+	model.to(device)
+	translated = model.generate(**tokens)
+	tgt_text = [tokenizer.decode(t, skip_special_tokens=True) for t in translated]
+	result=tgt_text[0]
+
+	return result

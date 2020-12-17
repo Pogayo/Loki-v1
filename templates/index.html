@@ -5,12 +5,12 @@
  <header class="App-header">
                 <div class="flex-row" style="margin-Right:auto"> <img src="{{url_for('static', filename='logo.png')}}" class="App-logo" alt="logo" />
                     <p>Machine Translation</p> </div>
-                {% if session.logged_in %}
+               <!--  {% if session.logged_in %}
 		          <a href="/logout/" class="in-line header-link">Logout</a>
 	           {% else %}
 		            <a href="/login/" class="in-line header-link" rel="noopener noreferrer">Login</a>
 		             <a href="/register/" class="in-line header-link">Sign up</a>
-	            {% endif %}
+	            {% endif %} -->
                 
             </header>
    
@@ -38,7 +38,7 @@
 </div>
 
 <div class="container">
-    <form action="{{ url_for('predict')}}" class="model_predictor" method="Post" >
+    <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
     	<h2>Let us Translate for you!</h2>
         <h3>Translate from Acholi to English</h3>
         <fieldset>
@@ -51,6 +51,15 @@
         </fieldset>
 
     </form>
+
+<<div class="result" align="center">
+    {% if result %}
+        <b>{{original_input}}</b>
+        <br>
+        <br> Predicted number of bikes in use:
+           <p style="font-size:50px">{{ result }}</p>
+    {% endif %}
+</div>
 </div>
 
 {% else %}
