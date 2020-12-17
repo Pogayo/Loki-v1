@@ -13,11 +13,11 @@ import predict
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '!9m@S-dThyIlW[pHQbN^'
+# app.config['SECRET_KEY'] = '!9m@S-dThyIlW[pHQbN^'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/test'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/test'
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
