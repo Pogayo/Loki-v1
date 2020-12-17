@@ -1,6 +1,6 @@
 numpy==1.16.0
-pandas
 Flask
+pandas
 Flask-Login
 Flask-SQLAlchemy
 Flask-WTF

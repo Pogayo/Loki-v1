@@ -1,7 +1,6 @@
 import torch
 from transformers import AutoTokenizer, AutoModelWithLMHead
 import numpy as np
-import pandas as pd
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelWithLMHead
 
