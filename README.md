@@ -1,20 +1,19 @@
 # Loki
 ---
 - Machine Translation project for English - Acholi.
-- Find [here the link]()to the application.
+- Find [here the link](https://loki-mt.herokuapp.com/)to the application.
 - You can check out the notebooks used for training the models in the notebooks folder
+- The models are found in models folder and tokenizers in the tokenizers folder
+- HuggingFace Models and tokenizers were used to initialize the weights. Find them [here](https://huggingface.co/Helsinki-NLP/opus-mt-luo-en#)
+- This is a Flask application
 
 ### Modules used
 ---
 | Module Name    | Usage in Application |
 |----------------|----------------------|
-|Flask           |Web Framework to create Application|
-|Flask-Login     | User Session Management in Flask|
-|Flask-SQLAlchemy|Adding support of SQLAlchemy into application|
-|Flask-WTF       | provide the interactive user interface for the user |
-|SQLAlchemy      |Provide ORM and  full power and flexibility of SQL |
-|Werkzeug        |For hashing and checking password|
-|WTForms         |flexible forms validation and rendering|
+|Torch          |DL Framework|
+|Transformers   | Models and Tokenizers|
+
 
 ### Installation
 ---
