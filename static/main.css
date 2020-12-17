@@ -65,6 +65,14 @@ body{
       position: relative;
 }
 
+.flex-container {
+/*      max-width: 500px;
+*/      width:  100%;
+      margin:0 auto;
+      position: relative;
+      display:flex;
+}
+
 .model_predictor  {
       background:#f9f9f9;
       padding:  25px;

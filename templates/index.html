@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="flex-container">
     <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
     	<h2>Let us Translate for you!</h2>
         <h3>Translate from Acholi to English</h3>
@@ -52,7 +52,7 @@
 
     </form>
 
-<<div class="result" align="center">
+<div class="result model_predictor" align="center">
     {% if result %}
         <b>{{original_input}}</b>
         <br>
