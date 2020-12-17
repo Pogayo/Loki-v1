@@ -203,12 +203,6 @@ if __name__ == '__main__':
     
     db.create_all()
     
-    app.run(host='0.0.0.0')
+    app.run()
 
-# def predict_ach()
-
-#     if flask.request.method == 'POST':
-#         data= flask.request.form['text-message']
-
-#         results=predict.return_results(data)
 
