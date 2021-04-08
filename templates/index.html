@@ -17,7 +17,7 @@
 <hr>
 
 {% if session['logged_in'] %}
-   <div class="welcome-div" style="width:80%;text-align: center;padding: 20px;color:white;">
+   <div class="welcome-div">
     <h1>Welcome, {{session['username'] }}!</h1>
     <div>
     	 {% if session.role=="member" %}
@@ -53,7 +53,7 @@
 
          <fieldset>
             Enter text to be translated: <br> <br>
-            <textarea name="text-message" rows="6" cols="50" minlength="2" required ></textarea>
+            <textarea name="text-message" rows="6" cols="50" minlength="1" required ></textarea>
         </fieldset>
 
         <fieldset>
@@ -62,7 +62,7 @@
 
     </form>
 
-<div class="result model_predictor" align="center">
+<div class="model_predictor" align="center">
     {% if result %}
     Translating from {{lang["source"]}} to {{lang["target"]}}
         <h4>Your Sentence: </h4>
@@ -78,7 +78,7 @@
 
 
 {% else %}
-<div class="welcome-div" >
+<div class="welcome-div result " >
 <h3>Hi, there!</h3>
 <h4> We hope you are fine</h4>
 <h4> Please log in or sign up for an account to use our translation services. </h4>

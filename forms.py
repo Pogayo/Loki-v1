@@ -33,3 +33,14 @@ class ValidateForm(Form):
 
     isValid= RadioField('Is the above translation correct', choices=[('True','True'),('False','False')],
         validators=[validators.DataRequired(message="Please Fill This Field")])
+
+
+def predict_sentence(data):
+    tokens=gen_embeddings(data)
+
+    return model.predict(tokens)
+
+
+def gen_embeddings(data):
+   data=data.to_lower()
+   bpe_codes=gen_bpe(data)
