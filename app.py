@@ -48,17 +48,28 @@ def home():
 
     session['role'] = "Validator"
 
+    lang_iso_map={
+    "luo" : "Dholuo",
+    "ach" : "Acholi",
+    "adh" : "Adhola"
+    }
+
     if request.method == 'POST':
         data= request.form['text-message']
         source=request.form['source']
+        target=request.form['target']
+
         lang={}
+
         if source=="en":
-            lang['source']="English"
-            lang["target"]="Acholi"
+            lang['source'] = "English"
+            lang["target"] = lang_iso_map[target]
+
         else:
-            lang['source']="Acholi"
-            lang["target"]="English"
-        results=predict.return_results(data, source)
+            lang['source'] = lang_iso_map[source]
+            lang["target"] = "English"
+
+        results=predict.return_results(data, source, target)
 
         return render_template('index.html',
                                      original_input=data,           

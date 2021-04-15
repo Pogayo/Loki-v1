@@ -41,25 +41,44 @@
 <div class="flex-container">
     <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
     	<h2>Let us Translate for you!</h2>
-         
-         <div>
-            <p>You are translating from? </p>
+        <div class="flex-container">
+
+         <div class = "language-div">
+            <p>Translate from: </p>
             <input type="radio" id="acholi" name="source" value="ach" required>
             <label for="acholi">Acholi</label><br>
+            <input type="radio" id="adhola" name="source" value="adh" required>
+            <label for="adhola">Dhopadhola</label><br>
+            <input type="radio" id="luo" name="source" value="luo" required>
+            <label for="luo">Dholuo</label><br>
              <input type="radio" id="english" name="source" value="en">
             <label for="english">English</label><br>
            <br>
          </div>
 
-         <fieldset>
+            <div class = "language-div">
+            <p>Translate to </p>
+            <input type="radio" id="acholi" name="target" value="ach" required>
+            <label for="acholi">Acholi</label><br>
+            <input type="radio" id="adhola" name="target" value="adh" required>
+            <label for="adhola">Dhopadhola</label><br>
+            <input type="radio" id="luo" name="target" value="luo" required>
+            <label for="luo">Dholuo</label><br>
+             <input type="radio" id="english" name="target" value="en">
+            <label for="english">English</label><br>
+           <br>
+         </div>
+        </div>
+
+         <fieldset  class = "language-div" >
             Enter text to be translated: <br> <br>
             <textarea name="text-message" rows="6" cols="50" minlength="1" required ></textarea>
         </fieldset>
 
-        <fieldset>
-            <input type="submit" value="Translate">
-        </fieldset>
-
+<!--         <fieldset>
+ -->            <input type="submit" value="Translate">
+<!--         </fieldset>
+ -->
     </form>
 
 <div class="model_predictor" align="center">
@@ -71,6 +90,8 @@
         <br> <h4>The Translation:</h4>
            <p style="font-size:50px; color:green">{{ result }}</p>
     {% else %}  
+  
+
     <p style="font-size:20px"> The translation will appear here! Just type a sentence and hit submit and make sure you have selected the language.</p>   
     {% endif %}
 </div>
