@@ -3,7 +3,7 @@ import requests
 import time
 
 # API_URL = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-luo"
-headers = {"Authorization": f"Bearer api_sRfRskxxxNmTHoMGhTrdMRsXRYjqjdKEsF"}
+headers = {"Authorization": }
 
 luo_attempts=0
 en_attempts=0
