@@ -41,19 +41,44 @@
 <div class="flex-container">
     <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
     	<h3>Let us Translate for you!</h3>
+       
         <div class="flex-container">
 
          <div class = "language-div">
+
             <p>Translate from: </p>
-            <input type="radio" id="acholi" name="source" value="ach" required>
+            <br>
+            <select id="source-lan" name="source"  class= "select-css"  required>
+                <option id="acholi-src" value="ach" > Acholi</option>
+                <option id="adhola-src" value="adh"> Dhopadhola</option>
+                <option id="luo-src"  value="luo"> Dholuo</option>
+                <option id="en-src"  value="en"> English</option>
+
+            </select>
+
+        </div>
+        <div class = "language-div">
+            <p>Translate to </p>
+             <br>
+             <select  id="target-lan" name="target" class="select-css" required >
+                <option id="en-tgt"  value="en"> English</option> 
+
+<!--                 <option id="acholi-tgt" name="target" value="ach" > Acholi</option>
+ -->                <!-- option id="adhola-tgt" name="target" value="adh"> Dhopadhola</option>
+                <option id="luo-tgt" name="target" value="luo"> Dholuo</option>
+                <option id="en-tgt"  value="en"> English</option> -->
+
+            </select>
+         </div>
+            <!-- <input type="radio" id="acholi" name="source" value="ach" required>
             <label for="acholi">Acholi</label><br>
             <input type="radio" id="adhola" name="source" value="adh" required>
             <label for="adhola">Dhopadhola</label><br>
             <input type="radio" id="luo" name="source" value="luo" required>
             <label for="luo">Dholuo</label><br>
              <input type="radio" id="english" name="source" value="en">
-            <label for="english">English</label><br>
-         </div>
+            <label for="english">English</label><br> --> 
+        <!--  </div>
 
             <div class = "language-div">
             <p>Translate to </p>
@@ -65,15 +90,16 @@
             <label for="luo">Dholuo</label><br>
              <input type="radio" id="english" name="target" value="en">
             <label for="english">English</label><br>
-         </div>
+         </div> --> 
         </div>
 
          <fieldset  class = "language-div" >
-            Enter text to be translated: <br> 
+            Enter text to be translated: <br><br> 
             <textarea name="text-message" rows="6" cols="50" minlength="1" required ></textarea>
         </fieldset>
-
+        <div style="text-align:center; width:100%">
           <input type="submit" value="Translate">
+      </div>
     </form>
 
 <div class="model_predictor" align="center">
@@ -90,7 +116,7 @@
             {% else %}  
 
                 <p style="font-size:25px; color:green">{{ result }}</p>
-                
+
             {% endif %}
 
 
