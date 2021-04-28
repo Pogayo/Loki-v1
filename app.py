@@ -71,10 +71,13 @@ def home():
 
         results=predict.return_results(data, source, target)
 
+        result_type = "Error" if results[1] == -1 else "Translation"
+
         return render_template('index.html',
                                      original_input=data,           
-                                     result=results,
-                                     lang=lang
+                                     result=results[0],
+                                     lang=lang,
+                                     result_type=result_type
                                      )
 
 

@@ -18,7 +18,7 @@
 
 {% if session['logged_in'] %}
    <div class="welcome-div">
-    <h1>Welcome, {{session['username'] }}!</h1>
+    <h2>Welcome, {{session['username'] }}!</h2>
     <div>
     	 {% if session.role=="member" %}
     	 Want to help us improve the system?
@@ -40,7 +40,7 @@
 
 <div class="flex-container">
     <form action="{{ url_for('home')}}" class="model_predictor" method="Post" >
-    	<h2>Let us Translate for you!</h2>
+    	<h3>Let us Translate for you!</h3>
         <div class="flex-container">
 
          <div class = "language-div">
@@ -53,7 +53,6 @@
             <label for="luo">Dholuo</label><br>
              <input type="radio" id="english" name="source" value="en">
             <label for="english">English</label><br>
-           <br>
          </div>
 
             <div class = "language-div">
@@ -66,12 +65,11 @@
             <label for="luo">Dholuo</label><br>
              <input type="radio" id="english" name="target" value="en">
             <label for="english">English</label><br>
-           <br>
          </div>
         </div>
 
          <fieldset  class = "language-div" >
-            Enter text to be translated: <br> <br>
+            Enter text to be translated: <br> 
             <textarea name="text-message" rows="6" cols="50" minlength="1" required ></textarea>
         </fieldset>
 
@@ -84,8 +82,17 @@
         <h4>Your Sentence: </h4>
         <b style="color:blue">{{original_input}}</b>
         <br>
-        <br> <h4>The Translation:</h4>
-           <p style="font-size:40px; color:green">{{ result }}</p>
+        <br> <h4>{{result_type}}</h4>
+            {% if result_type == "Error" %}
+
+                <p style="font-size:25px; color:red">{{ result }}</p>
+
+            {% else %}  
+
+                <p style="font-size:25px; color:green">{{ result }}</p>
+                
+            {% endif %}
+
 
     {% else %}  
   

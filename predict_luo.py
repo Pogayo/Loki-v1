@@ -23,12 +23,23 @@ def run_query(text, API_URL, attempts):
 
         }
 	res = query(inputs, API_URL)
+
 	if res and len(res)> 0:
-		if res[0].get('translation_text'):
-			attempts=0 #return it to zero for the next request
-			return res[0].get('translation_text')
-		else:
-			return str(res)
+		try:
+			if res[0].get('translation_text'):
+				attempts=0 #return it to zero for the next request
+				return (res[0].get('translation_text'), 1)
+			else:
+				return (str(res), -1)
+		except:
+			try:
+				# Model still loading: {'error': 'Model Helsinki-NLP/opus-mt-en-luo is currently loading', 'estimated_time': 10}
+				if res.get("error"):
+					return (res.get("error") + ".Try again in about 20 seconds. If problem doesn't resolve, contact aogayo@andrew.cmu.edu with a screenshot.", -1)
+			except:
+				return (str(res), -1)
+
+
 			# sleep(20)
 			# attempts = attempts + 1
 	        

@@ -59,7 +59,7 @@ def return_results(data, source, target):
 		return predict_luo.to_luo(data)
 
 	else:
-		return "Please select a valid combination. \nEnglish - Luo, \nEnglish - Acholi, \nEnglish - Dhopadola, \nLuo - English, \nAcholi - English, \n Dhopadhola - English\n"
+		return ("Please select a valid combination. English - Luo, English - Acholi, English - Dhopadola, Luo - English, Acholi - English, Dhopadhola - English", -1)
 		
 
 	# tokens=tokenizer.prepare_seq2seq_batch([data],padding=True,truncation=True, return_tensors="pt" )
