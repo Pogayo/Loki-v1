@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, RegisterForm, TransValidateForm, ValidateForm
 
 from werkzeug.security import generate_password_hash, check_password_hash
-import pymysql as MySQLdb
+# import pymysql as MySQLdb
 
 import predict
 
