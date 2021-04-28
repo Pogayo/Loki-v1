@@ -3,11 +3,10 @@ import requests
 import time
 from time import sleep
 
-
 # API_URL = "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-luo"
 headers = {"Authorization": f"Bearer api_sRfRskxxxNmTHoMGhTrdMRsXRYjqjdKEsF"}
 
-luo_attempts=0
+ach_attempts=0
 en_attempts=0
 
 def query(payload, API_URL):
@@ -23,25 +22,25 @@ def run_query(text, API_URL, attempts):
 
         }
 	res = query(inputs, API_URL)
-	if res and len(res)> 0:
-		if res[0].get('translation_text'):
+	
+	if res and len(res)>0:
+		if res[0].get('generated_text'):
 			attempts=0 #return it to zero for the next request
-			return res[0].get('translation_text')
+			return res[0].get('generated_text')
 		else:
-			return str(res)
-			# sleep(20)
-			# attempts = attempts + 1
+			sleep(20)
+			attempts = attempts + 1
 	        
-			# if attempts < 4:
-			# 	run_query(inputs, API_URL, attempts)
-			# else:
-			# 	return "Attempts maxxed out. Please try again later"
+			if attempts < 4:
+				run_query(inputs, API_URL, attempts)
+			else:
+				return "Attempts maxxed out. Please try again later"
 
 
 def to_en(text):
-	return run_query(text, "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-luo-en", en_attempts)
+	return run_query(text, "https://api-inference.huggingface.co/models/Ogayo/mt-ach-en", en_attempts)
 	
 
 
-def to_luo(text):
-	return run_query(text, "https://api-inference.huggingface.co/models/Helsinki-NLP/opus-mt-en-luo", luo_attempts)
+def to_ach(text):
+	return run_query(text, "https://api-inference.huggingface.co/models/Ogayo/mt-en-ach", ach_attempts)
